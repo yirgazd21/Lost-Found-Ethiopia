@@ -26,6 +26,8 @@ app.use(express.json());
 // Built-in middleware to parse incoming URL-encoded payloads (like form submissions)
 app.use(express.urlencoded({ extended: true }));
 
+import authRoutes from './modules/auth/auth.routes';
+
 // Basic Health Check Route
 app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
@@ -33,6 +35,9 @@ app.get('/', (req: Request, res: Response) => {
     status: 'Running'
   });
 });
+
+// Mount Routes
+app.use('/api/v1/auth', authRoutes);
 
 // Define the port from environment variables or default to 5000
 const PORT = process.env.PORT || 5000;
