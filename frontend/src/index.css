@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6; /* Main brand color: Royal Blue */
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+
+  --color-accent-500: #10b981; /* Emerald Green */
+  --color-accent-600: #059669;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  
+  --animate-fade-in: fadeIn 0.4s ease-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Global resets for a premium feel */
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased font-sans transition-colors duration-300;
+  }
+  
+  /* Modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+}
+
+/* Utility classes for glassmorphism */
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl;
+  }
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-slate-100 shadow-lg rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  .btn-primary {
+    @apply px-6 py-3 bg-brand-600 text-white font-medium rounded-xl shadow-md shadow-brand-500/30 hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-500/40 transition-all duration-300 active:scale-95;
+  }
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-slate-700 font-medium rounded-xl border border-slate-200 shadow-sm hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 transition-all duration-300 active:scale-95;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all duration-200 outline-none text-slate-800 placeholder-slate-400;
+  }
+}
