@@ -10,6 +10,7 @@ export enum UserRole {
 
 // Define the interface for TypeScript type checking
 export interface IUser extends Document {
+  id: string;
   name: string;
   phone: string;
   email?: string;
