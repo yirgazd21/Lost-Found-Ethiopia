@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn, Phone, Lock, AlertCircle } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [phone, setPhone] = useState('');
@@ -31,6 +32,28 @@ const Login = () => {
     } catch (err: any) {
       setError(
         err.response?.data?.message || 'An error occurred during login. Please try again.'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    setError('');
+    setIsLoading(true);
+    try {
+      const response = await axios.post('http://localhost:5000/api/v1/auth/google', {
+        credential: credentialResponse.credential,
+      });
+
+      const { token, ...userData } = response.data.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      navigate('/dashboard');
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message || 'Google login failed. Please try again.'
       );
     } finally {
       setIsLoading(false);
@@ -107,6 +130,25 @@ const Login = () => {
               )}
             </button>
           </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-slate-500">Or continue with</span>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => setError('Google login failed.')}
+                useOneTap
+              />
+            </div>
+          </div>
 
           <p className="text-center text-slate-500 mt-8 text-sm">
             Don't have an account?{' '}

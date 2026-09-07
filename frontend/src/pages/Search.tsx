@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Search as SearchIcon, MapPin, Calendar, Tag, AlertCircle, Phone } from 'lucide-react';
+import { Search as SearchIcon, MapPin, Calendar, Tag, AlertCircle, Phone, Mail } from 'lucide-react';
 
 interface Item {
   _id: string;
@@ -14,7 +14,8 @@ interface Item {
   date_found?: string;
   user_id: {
     name: string;
-    phone: string;
+    phone?: string;
+    email?: string;
   };
   createdAt: string;
 }
@@ -43,16 +44,15 @@ const Search = () => {
     }
   };
 
-  // Fetch items when tab changes or when search query is submitted
+  // Fetch items when tab or search query changes (with debounce)
   useEffect(() => {
-    fetchItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab]);
+    const delayDebounceFn = setTimeout(() => {
+      fetchItems();
+    }, 300);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetchItems();
-  };
+    return () => clearTimeout(delayDebounceFn);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, searchQuery]);
 
   return (
     <div className="min-h-screen bg-slate-50 py-12 px-4">
@@ -65,7 +65,7 @@ const Search = () => {
             Search through our database of reported items across Ethiopia.
           </p>
 
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto pt-6 flex gap-2">
+          <div className="max-w-2xl mx-auto pt-6 flex gap-2">
             <div className="relative flex-grow">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                 <SearchIcon size={20} />
@@ -74,14 +74,11 @@ const Search = () => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by keywords (e.g., iPhone, Wallet, Bole...)"
+                placeholder="Instant search by keywords (e.g., iPhone, Wallet, Bole...)"
                 className="input-field pl-12 bg-white shadow-sm"
               />
             </div>
-            <button type="submit" className="btn-primary px-8">
-              Search
-            </button>
-          </form>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -165,11 +162,20 @@ const Search = () => {
                     </span>
                   </div>
 
-                  {/* Contact Info (Only visible if the user who posted it has phone attached via populate) */}
-                  {item.user_id && item.user_id.phone && (
+                  {/* Contact Info (Visible if phone or email is available) */}
+                  {(item.user_id?.phone || item.user_id?.email) && (
                     <div className="flex items-center gap-2 text-sm font-medium text-slate-700 bg-slate-50 p-2 rounded-lg mt-2">
-                      <Phone size={16} className="text-slate-400" />
-                      Contact: {item.user_id.phone}
+                      {item.user_id.phone ? (
+                        <>
+                          <Phone size={16} className="text-slate-400" />
+                          <span>Contact: {item.user_id.phone}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Mail size={16} className="text-slate-400" />
+                          <span>Contact: {item.user_id.email}</span>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
