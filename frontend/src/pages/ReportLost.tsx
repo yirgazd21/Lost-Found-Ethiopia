@@ -55,13 +55,13 @@ const ReportLost = () => {
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4">
         <div className="glass-card p-10 text-center animate-slide-up max-w-md w-full">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-6">
             <CheckCircle size={40} />
           </div>
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">Report Submitted!</h2>
-          <p className="text-slate-500">Your lost item has been added to the database. We will notify you if there is a match.</p>
+          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">Report Submitted!</h2>
+          <p className="text-slate-500 dark:text-slate-400">Your lost item has been added to the database. We will notify you if there is a match.</p>
           <p className="text-sm text-slate-400 mt-6">Redirecting to dashboard...</p>
         </div>
       </div>
@@ -69,12 +69,12 @@ const ReportLost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
       <div className="max-w-2xl mx-auto animate-fade-in">
         
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-slate-800">Report a Lost Item</h1>
-          <p className="text-slate-500 mt-2">Provide as much detail as possible to help us find a match.</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Report a Lost Item</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Provide as much detail as possible to help us find a match.</p>
         </div>
 
         {status === 'error' && (

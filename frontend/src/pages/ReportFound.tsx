@@ -55,7 +55,7 @@ const ReportFound = () => {
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4">
         <div className="glass-card p-10 text-center animate-slide-up max-w-md w-full">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-6">
             <CheckCircle size={40} />
@@ -69,12 +69,12 @@ const ReportFound = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
       <div className="max-w-2xl mx-auto animate-fade-in">
         
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-slate-800">Report a Found Item</h1>
-          <p className="text-slate-500 mt-2">Thank you for finding this! Please be careful not to reveal private details publicly.</p>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Report a Found Item</h1>
+          <p className="text-slate-500 dark:text-slate-400 mt-2">Thank you for finding this! Please be careful not to reveal private details publicly.</p>
         </div>
 
         {status === 'error' && (

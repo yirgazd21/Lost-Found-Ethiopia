@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { UserPlus, Phone, Lock, User, AlertCircle, Mail } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
@@ -14,6 +14,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,8 +33,9 @@ const Register = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
 
-      // Redirect to dashboard on successful registration
-      navigate('/dashboard');
+      // Navigate to the page they were trying to visit, or dashboard
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from);
     } catch (err: any) {
       setError(
         err.response?.data?.message || 'An error occurred during registration. Please try again.'
@@ -55,7 +57,8 @@ const Register = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
 
-      navigate('/dashboard');
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from);
     } catch (err: any) {
       setError(
         err.response?.data?.message || 'Google registration failed. Please try again.'
@@ -66,7 +69,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 py-12">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-slate-950 py-12">
       <div className="w-full max-w-md animate-slide-up">
         <div className="glass-card p-8">
           
@@ -74,8 +77,8 @@ const Register = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-100 text-brand-600 mb-4">
               <UserPlus size={32} />
             </div>
-            <h1 className="text-3xl font-bold text-slate-800">Create an Account</h1>
-            <p className="text-slate-500 mt-2">Join the community to report and find lost items</p>
+            <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Create an Account</h1>
+            <p className="text-slate-500 dark:text-slate-400 mt-2">Join the community to report and find lost items</p>
           </div>
 
           {error && (
@@ -180,7 +183,7 @@ const Register = () => {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-slate-500">Or continue with</span>
+                <span className="px-2 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400">Or continue with</span>
               </div>
             </div>
 
@@ -193,7 +196,7 @@ const Register = () => {
             </div>
           </div>
 
-          <p className="text-center text-slate-500 mt-8 text-sm">
+          <p className="text-center text-slate-500 dark:text-slate-400 mt-8 text-sm">
             Already have an account?{' '}
             <Link to="/login" className="text-brand-600 font-medium hover:underline">
               Sign in here

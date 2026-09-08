@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { LogIn, Phone, Lock, AlertCircle } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
@@ -10,6 +10,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,8 +28,9 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
 
-      // Redirect to dashboard
-      navigate('/dashboard');
+      // Navigate to the page they were trying to visit, or dashboard
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from);
     } catch (err: any) {
       setError(
         err.response?.data?.message || 'An error occurred during login. Please try again.'
@@ -50,7 +52,9 @@ const Login = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(userData));
 
-      navigate('/dashboard');
+      // Navigate to the page they were trying to visit, or dashboard
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from);
     } catch (err: any) {
       setError(
         err.response?.data?.message || 'Google login failed. Please try again.'
@@ -61,7 +65,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-slate-950">
       <div className="w-full max-w-md animate-slide-up">
         <div className="glass-card p-8">
           
@@ -69,8 +73,8 @@ const Login = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-100 text-brand-600 mb-4">
               <LogIn size={32} />
             </div>
-            <h1 className="text-3xl font-bold text-slate-800">Welcome Back</h1>
-            <p className="text-slate-500 mt-2">Enter your credentials to access your account</p>
+            <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">Welcome Back</h1>
+            <p className="text-slate-500 dark:text-slate-400 mt-2">Enter your credentials to access your account</p>
           </div>
 
           {error && (
@@ -82,7 +86,7 @@ const Login = () => {
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700 ml-1">Phone Number</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 ml-1">Phone Number</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <Phone size={18} />
@@ -137,7 +141,7 @@ const Login = () => {
                 <div className="w-full border-t border-slate-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-slate-500">Or continue with</span>
+                <span className="px-2 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400">Or continue with</span>
               </div>
             </div>
 
@@ -150,7 +154,7 @@ const Login = () => {
             </div>
           </div>
 
-          <p className="text-center text-slate-500 mt-8 text-sm">
+          <p className="text-center text-slate-500 dark:text-slate-400 mt-8 text-sm">
             Don't have an account?{' '}
             <Link to="/register" className="text-brand-600 font-medium hover:underline">
               Sign up here

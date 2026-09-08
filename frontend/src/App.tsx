@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import ReportLost from './pages/ReportLost';
 import ReportFound from './pages/ReportFound';
 import Search from './pages/Search';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 // We will create these pages in the upcoming phases
 // For now, we use simple placeholder components to ensure routing works
@@ -29,9 +30,21 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/report-lost" element={<ReportLost />} />
-            <Route path="/report-found" element={<ReportFound />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute />
+            }>
+              <Route index element={<Dashboard />} />
+            </Route>
+            <Route path="/report-lost" element={
+              <ProtectedRoute />
+            }>
+              <Route index element={<ReportLost />} />
+            </Route>
+            <Route path="/report-found" element={
+              <ProtectedRoute />
+            }>
+              <Route index element={<ReportFound />} />
+            </Route>
             <Route path="/search" element={<Search />} />
           </Routes>
         </main>

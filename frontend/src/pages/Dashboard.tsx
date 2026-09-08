@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Search, MapPin, Package, LogOut } from 'lucide-react';
+import { Search, MapPin, Package, LogOut, Clock } from 'lucide-react';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Dashboard = () => {
   if (!user) return null; // Prevent flash of content before redirect
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
       <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
         
         {/* Welcome Banner */}
@@ -47,7 +47,7 @@ const Dashboard = () => {
 
         {/* Quick Actions */}
         <div>
-          <h2 className="text-xl font-bold text-slate-800 mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             <Link to="/report-lost" className="glass-card p-6 flex flex-col items-center justify-center text-center gap-4 group">
@@ -55,8 +55,8 @@ const Dashboard = () => {
                 <Search size={28} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-800">Report Lost Item</h3>
-                <p className="text-sm text-slate-500 mt-1">Did you lose something?</p>
+                <h3 className="font-bold text-slate-800 dark:text-slate-100">Report Lost Item</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Did you lose something?</p>
               </div>
             </Link>
 
@@ -65,8 +65,8 @@ const Dashboard = () => {
                 <MapPin size={28} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-800">Report Found Item</h3>
-                <p className="text-sm text-slate-500 mt-1">Did you find something?</p>
+                <h3 className="font-bold text-slate-800 dark:text-slate-100">Report Found Item</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Did you find something?</p>
               </div>
             </Link>
 
@@ -75,8 +75,8 @@ const Dashboard = () => {
                 <Package size={28} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-800">Browse Database</h3>
-                <p className="text-sm text-slate-500 mt-1">Search through all items</p>
+                <h3 className="font-bold text-slate-800 dark:text-slate-100">Browse Database</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Search through all items</p>
               </div>
             </Link>
 
@@ -85,11 +85,13 @@ const Dashboard = () => {
 
         {/* Recent Reports Placeholder */}
         <div>
-          <h2 className="text-xl font-bold text-slate-800 mb-4">Your Recent Reports</h2>
-          <div className="glass-panel p-12 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
-            <Package size={48} className="mx-auto text-slate-300 mb-4" />
-            <h3 className="font-medium text-slate-600 mb-1">No reports yet</h3>
-            <p className="text-sm text-slate-400">Items you report will appear here.</p>
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Your Recent Reports</h2>
+          <div className="glass-card p-8 text-center">
+            <div className="mx-auto w-16 h-16 bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 rounded-full flex items-center justify-center mb-4">
+              <Clock size={24} />
+            </div>
+            <h3 className="text-lg font-medium text-slate-700 dark:text-slate-300">No recent reports</h3>
+            <p className="text-slate-500 dark:text-slate-400 mt-2">Items you report will appear here.</p>
           </div>
         </div>
 

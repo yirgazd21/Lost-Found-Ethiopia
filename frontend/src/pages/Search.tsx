@@ -55,13 +55,13 @@ const Search = () => {
   }, [activeTab, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto space-y-8 animate-fade-in">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-12 px-4">
+      <div className="max-w-7xl mx-auto">
         
-        {/* Header & Search Bar */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-slate-800">Database Search</h1>
-          <p className="text-slate-500 max-w-2xl mx-auto">
+        {/* Search Header */}
+        <div className="text-center mb-12 animate-slide-up">
+          <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100">Database Search</h1>
+          <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
             Search through our database of reported items across Ethiopia.
           </p>
 
@@ -85,20 +85,20 @@ const Search = () => {
         <div className="flex justify-center gap-4 border-b border-slate-200 pb-px">
           <button
             onClick={() => setActiveTab('lost')}
-            className={`px-8 py-3 font-medium text-sm transition-colors border-b-2 ${
+            className={`pb-4 px-2 font-medium border-b-2 transition-colors flex items-center gap-2 ${
               activeTab === 'lost' 
-                ? 'border-brand-600 text-brand-600' 
-                : 'border-transparent text-slate-500 hover:text-slate-700'
+                ? 'border-brand-500 text-brand-600 dark:text-brand-400' 
+                : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
             Lost Items
           </button>
           <button
             onClick={() => setActiveTab('found')}
-            className={`px-8 py-3 font-medium text-sm transition-colors border-b-2 ${
+            className={`pb-4 px-2 font-medium border-b-2 transition-colors flex items-center gap-2 ${
               activeTab === 'found' 
-                ? 'border-emerald-600 text-emerald-600' 
-                : 'border-transparent text-slate-500 hover:text-slate-700'
+                ? 'border-brand-500 text-brand-600 dark:text-brand-400' 
+                : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
             }`}
           >
             Found Items
@@ -129,19 +129,19 @@ const Search = () => {
               <div key={item._id} className="glass-card p-6 flex flex-col h-full hover:border-brand-200 transition-colors">
                 <div className="flex justify-between items-start mb-4">
                   <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                    activeTab === 'lost' ? 'bg-red-100 text-red-600' : 'bg-emerald-100 text-emerald-600'
+                    activeTab === 'lost' ? 'bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400'
                   }`}>
-                    {activeTab === 'lost' ? 'LOST' : 'FOUND'}
+                    {activeTab === 'lost' ? 'Lost' : 'Found'}
                   </span>
-                  <span className="text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1 rounded-full flex items-center gap-1">
+                  <span className="text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full flex items-center gap-1">
                     <Tag size={12} />
                     {item.category}
                   </span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-slate-800 mb-2 line-clamp-2">{item.title}</h3>
+                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2 line-clamp-2">{item.title}</h3>
                 
-                <p className="text-slate-600 text-sm mb-6 flex-grow line-clamp-3">
+                <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow line-clamp-3">
                   {item.description || item.public_description}
                 </p>
                 
@@ -164,15 +164,15 @@ const Search = () => {
 
                   {/* Contact Info (Visible if phone or email is available) */}
                   {(item.user_id?.phone || item.user_id?.email) && (
-                    <div className="flex items-center gap-2 text-sm font-medium text-slate-700 bg-slate-50 p-2 rounded-lg mt-2">
+                    <div className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-lg mt-2 border border-slate-100 dark:border-slate-700">
                       {item.user_id.phone ? (
                         <>
-                          <Phone size={16} className="text-slate-400" />
+                          <Phone size={16} className="text-slate-400 dark:text-slate-500" />
                           <span>Contact: {item.user_id.phone}</span>
                         </>
                       ) : (
                         <>
-                          <Mail size={16} className="text-slate-400" />
+                          <Mail size={16} className="text-slate-400 dark:text-slate-500" />
                           <span>Contact: {item.user_id.email}</span>
                         </>
                       )}

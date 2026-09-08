@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-50: #eff6ff;
   --color-brand-100: #dbeafe;
@@ -34,7 +36,7 @@
 /* Global resets for a premium feel */
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 antialiased font-sans transition-colors duration-300;
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased font-sans transition-colors duration-300;
   }
   
   /* Modern scrollbar */
@@ -56,18 +58,18 @@
 /* Utility classes for glassmorphism */
 @layer utilities {
   .glass-panel {
-    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl;
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/40 dark:border-slate-800/40 shadow-xl rounded-2xl;
   }
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-slate-100 shadow-lg rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-100 dark:border-slate-800 shadow-lg rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
   }
   .btn-primary {
     @apply px-6 py-3 bg-brand-600 text-white font-medium rounded-xl shadow-md shadow-brand-500/30 hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-500/40 transition-all duration-300 active:scale-95;
   }
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-slate-700 font-medium rounded-xl border border-slate-200 shadow-sm hover:bg-slate-50 hover:border-slate-300 hover:text-slate-900 transition-all duration-300 active:scale-95;
+    @apply px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white transition-all duration-300 active:scale-95;
   }
   .input-field {
-    @apply w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all duration-200 outline-none text-slate-800 placeholder-slate-400;
+    @apply w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all duration-200 outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500;
   }
 }

@@ -51,44 +51,44 @@ const Home = () => {
       </section>
 
       {/* How it works section */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-slate-50 dark:bg-slate-950">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">How It Works</h2>
-            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Simple, secure, and effective. We take the hassle out of finding your lost items.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">How It Works</h2>
+            <p className="text-slate-500 dark:text-slate-400 mt-4 max-w-2xl mx-auto">Simple, secure, and effective. We take the hassle out of finding your lost items.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Step 1 */}
             <div className="glass-card p-8 text-center group">
-              <div className="mx-auto w-16 h-16 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <div className="mx-auto w-16 h-16 bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                 <MapPin size={32} />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">1. Report Item</h3>
-              <p className="text-slate-500 leading-relaxed">
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">1. Report Item</h3>
+              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Provide details about what you lost or found, including the location and a description.
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="glass-card p-8 text-center group">
-              <div className="mx-auto w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <div className="mx-auto w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                 <Search size={32} />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">2. We Match</h3>
-              <p className="text-slate-500 leading-relaxed">
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">2. We Match</h3>
+              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Our smart platform allows you to search through reports to find a matching lost or found item.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="glass-card p-8 text-center group">
-              <div className="mx-auto w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+              <div className="mx-auto w-16 h-16 bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm">
                 <ShieldCheck size={32} />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">3. Connect Securely</h3>
-              <p className="text-slate-500 leading-relaxed">
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">3. Connect Securely</h3>
+              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Verify ownership privately using secret details without exposing personal information to the public.
               </p>
             </div>

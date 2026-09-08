@@ -1,10 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Search, MapPin, User, LogIn, Menu, X } from 'lucide-react';
+import { Search, MapPin, User, LogIn, Menu, X, Sun, Moon } from 'lucide-react';
 import { useState } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { isDark, setTheme, theme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(isDark ? 'light' : 'dark');
+  };
 
   // Helper to determine if a link is active
   const isActive = (path: string) => location.pathname === path;
@@ -40,8 +46,8 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`flex items-center gap-2 hover:text-brand-600 transition-colors ${
-                  isActive(link.path) ? 'text-brand-600' : ''
+                className={`flex items-center gap-2 hover:text-brand-600 dark:hover:text-brand-400 transition-colors ${
+                  isActive(link.path) ? 'text-brand-600 dark:text-brand-400' : 'dark:text-slate-300'
                 }`}
               >
                 {link.icon}
@@ -52,9 +58,17 @@ const Navbar = () => {
 
           <div className="h-6 w-px bg-slate-200"></div>
 
-          {/* Auth Buttons */}
+          {/* Theme Toggle & Auth Buttons */}
           <div className="flex items-center gap-4">
-            <Link to="/login" className="flex items-center gap-2 text-slate-600 hover:text-brand-600 font-medium transition-colors">
+            <button 
+              onClick={toggleTheme} 
+              className="p-2 text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400 transition-colors"
+              aria-label="Toggle Theme"
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+            
+            <Link to="/login" className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium transition-colors">
               <LogIn size={18} />
               Login
             </Link>
@@ -66,12 +80,20 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-slate-600 p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <button 
+            onClick={toggleTheme} 
+            className="p-2 text-slate-500 dark:text-slate-400"
+          >
+            {isDark ? <Sun size={22} /> : <Moon size={22} />}
+          </button>
+          <button 
+            className="text-slate-600 dark:text-slate-300 p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation Dropdown */}
@@ -82,13 +104,13 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 text-slate-700"
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
             >
               <div className="text-brand-500">{link.icon}</div>
               <span className="font-medium">{link.name}</span>
             </Link>
           ))}
-          <div className="h-px w-full bg-slate-100 my-2"></div>
+          <div className="h-px w-full bg-slate-100 dark:bg-slate-700 my-2"></div>
           <Link to="/login" onClick={() => setIsMenuOpen(false)} className="btn-secondary text-center">
             Login
           </Link>
