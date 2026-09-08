@@ -9,6 +9,10 @@ import ReportLost from './pages/ReportLost';
 import ReportFound from './pages/ReportFound';
 import Search from './pages/Search';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import AdminRoute from './components/Auth/AdminRoute';
+import AdminDashboard from './pages/Admin/Dashboard';
+import AdminUsers from './pages/Admin/Users';
+import AdminReports from './pages/Admin/Reports';
 
 // We will create these pages in the upcoming phases
 // For now, we use simple placeholder components to ensure routing works
@@ -46,6 +50,13 @@ function App() {
               <Route index element={<ReportFound />} />
             </Route>
             <Route path="/search" element={<Search />} />
+
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminRoute />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="reports" element={<AdminReports />} />
+            </Route>
           </Routes>
         </main>
 

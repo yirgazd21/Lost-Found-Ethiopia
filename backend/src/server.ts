@@ -29,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 import authRoutes from './modules/auth/auth.routes';
 import lostItemRoutes from './modules/lost-items/lost-items.routes';
 import foundItemRoutes from './modules/found-items/found-items.routes';
+import adminRoutes from './modules/admin/admin.routes';
 
 // Basic Health Check Route
 app.get('/', (req: Request, res: Response) => {
@@ -42,6 +43,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/lost-items', lostItemRoutes);
 app.use('/api/v1/found-items', foundItemRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 // Define the port from environment variables or default to 5000
 const PORT = process.env.PORT || 5000;

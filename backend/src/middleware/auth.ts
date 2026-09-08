@@ -52,3 +52,14 @@ export const protect = async (
     next(new Error('Not authorized, no token provided'));
   }
 };
+
+// Middleware to authorize specific roles
+export const authorize = (...roles: string[]) => {
+  return (req: AuthRequest, res: Response, next: NextFunction) => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      res.status(403);
+      return next(new Error(`User role ${req.user?.role} is not authorized to access this route`));
+    }
+    next();
+  };
+};
